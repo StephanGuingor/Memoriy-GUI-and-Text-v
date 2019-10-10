@@ -46,6 +46,11 @@ class Board:
         return self.no_rep_list
 
     def print_draw(self,card_list_obj):
+        print(self.rules)
+        n = input()
+        if "\n" == n or n != "\n":
+            pass
+        os.system('clear')
         dictionary = self.dictionary_maker(card_list_obj)
         user = input("\n...Ready to play...\n").lower()
         column = "Ready"
@@ -53,7 +58,7 @@ class Board:
         n=0
         tries=0
         if user == "si":
-            while column != "QUIT" or row !="quit" or n <=8 or tries>50:
+            while column != "QUIT" or row !="quit" or tries>50:
                 tries += 1
                 os.system('clear')
                 print(" "," A  ","B  ","C  ","D  ")
@@ -62,6 +67,8 @@ class Board:
                 print("3",dictionary["A3"][1],dictionary["B3"][1],dictionary["C3"][1],dictionary["D3"][1],"\n")
                 print("4",dictionary["A4"][1],dictionary["B4"][1],dictionary["C4"][1],dictionary["D4"][1],"\n\n\n")
                 print(f"Score = {n}\n")
+                if n > 7:
+                    return print(f"You won in {tries} tries")
                 column = input("Choose the column:").upper()
                 row = input("Choose the row:")
                 answer1 = (column+row).strip()
@@ -76,7 +83,8 @@ class Board:
                         print("3",dictionary["A3"][1],dictionary["B3"][1],dictionary["C3"][1],dictionary["D3"][1],"\n")
                         print("4",dictionary["A4"][1],dictionary["B4"][1],dictionary["C4"][1],dictionary["D4"][1],"\n\n\n")
                         print(f"Score = {n}\n")
-
+                        if n > 7:
+                            return print(f"You won in {tries} tries")
                         column = input("Choose a new column:").upper()
                         row = input("Choose a new row:")
                         answer2 = (column+row).strip()
@@ -93,7 +101,7 @@ class Board:
                                     print("3",dictionary["A3"][1],dictionary["B3"][1],dictionary["C3"][1],dictionary["D3"][1],"\n")
                                     print("4",dictionary["A4"][1],dictionary["B4"][1],dictionary["C4"][1],dictionary["D4"][1],"\n\n\n")
                                     print(f"Score = {n}\n")
-                                    time.sleep(2)
+                                    time.sleep(1)
 
                                     if new_value1 == new_value2 and new_value1 not in self.show_no_rep():
                                         print("You got a pair!")
@@ -109,6 +117,7 @@ class Board:
                                 else:
                                     print("\nENTER VALID INPUT(2)\n")
                             else:
+                                
                                 tries = 100
                                 break
                         else:
@@ -116,13 +125,13 @@ class Board:
                     else:
                         print("\nENTER VALID INPUT\n")
                 else:
+    
                     tries = 100
                     break
                     
             else:
-                if n >= 8:
-                    print(f"You won in {tries} tries")
-                elif tries>50:
+                
+                if tries>50:
                     print("You lost, too many tries")
                 else:
                     print("BYE")
